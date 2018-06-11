@@ -84,7 +84,7 @@ class PluginManager
             }
 
             try {
-                $plugin = app($pluginClass, [$this->app]);
+                $plugin = $this->app->makeWith($pluginClass, [$this->app]);
             } catch (\ReflectionException $e) {
                 dd('Plugin ' . $directoryName . ' could not be booted: "' . $e->getMessage() . '"');
                 exit;
@@ -106,7 +106,7 @@ class PluginManager
      */
     protected function getPluginClassNameFromDirectory($directory)
     {
-        return "Api\\Plugins\\$directory\\" . $directory . "Plugin";
+        return "App\\Plugins\\${directory}\\${directory}Plugin";
     }
 
     /**

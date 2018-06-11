@@ -1,6 +1,8 @@
 <?php
 namespace Oneso\LaravelPlugins;
 
+use Illuminate\Contracts\Foundation\Application;
+
 abstract class Plugin
 {
     protected $app;
@@ -22,7 +24,7 @@ abstract class Plugin
      *
      * @param $app
      */
-    public function __construct($app)
+    public function __construct(Application $app)
     {
         $this->app = $app;
 
@@ -75,7 +77,7 @@ abstract class Plugin
      */
     protected function enableRoutes($path = 'src/routes.php')
     {
-        $this->app->group(['namespace' => $this->getPluginControllerNamespace()], function ($app) use ($path) {
+        $this->app->router->group(['namespace' => $this->getPluginControllerNamespace()], function ($app) use ($path) {
             require $this->getPluginPath() . DIRECTORY_SEPARATOR . $path;
         });
     }
