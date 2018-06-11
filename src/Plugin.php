@@ -62,7 +62,7 @@ abstract class Plugin
      *
      * @param string $path
      */
-    protected function enableViews($path = 'src/views')
+    protected function enableViews($path = 'views')
     {
         $this->app['view']->addNamespace(
             $this->getViewNamespace(),
@@ -75,7 +75,7 @@ abstract class Plugin
      *
      * @param string $path
      */
-    protected function enableRoutes($path = 'src/routes.php')
+    protected function enableRoutes($path = 'routes.php')
     {
         $this->app->router->group(['namespace' => $this->getPluginControllerNamespace()], function ($app) use ($path) {
             require $this->getPluginPath() . DIRECTORY_SEPARATOR . $path;
