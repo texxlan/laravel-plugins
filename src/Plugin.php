@@ -46,14 +46,22 @@ abstract class Plugin
     }
 
     /**
-     * Returns the view namespace
-     * Eg: 'plugin:articles'
+     * Returns the view namespace in a camel case format based off
+     * the plugins class name, with plugin stripped off the end.
+     * 
+     * Eg: ArticlesPlugin will be accessible through 'plugin:articles::<view name>'
      *
      * @return string
      */
     protected function getViewNamespace()
     {
-        return 'plugin:' . $this->name;
+        return 'plugin:' . camel_case(
+            mb_substr(
+                get_called_class(),
+                strrpos(get_called_class(), '\\') + 1,
+                -6
+            )
+        );
     }
 
     /**

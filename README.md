@@ -17,23 +17,22 @@ Plugins must be in app/Plugins. Example plugin structure:
   - Http
     - Controllers
       - TestController.php
-  - src
-    - views
-      - test.blade.php
-    - routes.php
+  - views
+    - test.blade.php
+  - routes.php
   - TestPlugin.php
 
 The TestPlugin class must extend the Oneso\LaravelPlugins\Plugin class, containing a unique $name property and a boot() method.
 
 ### Views
 In the boot() method of your plugin call `$this->enableViews()`.
-Optional you can pass a relative path to the views directory, default to `src/views`.
-Views automatically have a namespace (`"plugin:{plugin name}"`). For the example above it would be `plugin:test`.
-To render a view you can either write the namespace yourself or use the helper method `view()` in the plugin class.
+Optional you can pass a relative path to the views directory, default to `views`.
+Views automatically have a namespace (`"plugin:{name}"`), the name is defined by the the main plugin class in a camel case format, with `Plugin` stripped from the end. For the example above it would be `plugin:test`.
+To render a view you can either write the namespace yourself or use the helper method `view()` in the plugin class. For example `view('plugin:test::some.view.name');`
 
 ### Routes
 In the boot() method of your plugin call `$this->enableRoutes()`.
-Optional you can pass a relative path to the routes file, default to `src/routes.php`.
+Optional you can pass a relative path to the routes file, default to `routes.php`.
 You automatically have access to the `$app` variable.
 Routes are automatically grouped to your plugin namespace, so you only have to type the controller name without the namespace.
 
