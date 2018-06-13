@@ -15,6 +15,20 @@ abstract class Plugin
     public $name;
 
     /**
+     * A description of the plugin.
+     * 
+     * @var string
+     */
+    public $description;
+
+    /**
+     * The version of the plugin.
+     * 
+     * @var string
+     */
+    public $version;
+
+    /**
      * @var $this
      */
     private $reflector = null;
