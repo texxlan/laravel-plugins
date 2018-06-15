@@ -105,6 +105,21 @@ abstract class Plugin
     }
 
     /**
+     * Register a database migration path for this plugin.
+     *
+     * @param  array|string  $paths
+     * @return void
+     */
+    protected function enableMigrations($path = 'migrations')
+    {
+        $this->app->afterResolving('migrator', function ($migrator) use ($paths) {
+            foreach ((array) $paths as $path) {
+                $migrator->path($this->getPluginPath() . DIRECTORY_SEPARATOR . $path);
+            }
+        });
+    }
+
+    /**
      * @return string
      */
     public function getPluginPath()

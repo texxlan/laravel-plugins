@@ -19,6 +19,8 @@ Plugins must be in app/Plugins. Example plugin structure:
       - TestController.php
   - views
     - test.blade.php
+  - migrations
+    - 2018_06_15_000000_create_test_table.php
   - routes.php
   - TestPlugin.php
 
@@ -38,6 +40,11 @@ Routes are automatically grouped to your plugin namespace, so you only have to t
 
 ### Controllers
 Controllers must be in PluginDirectory->Http->Controllers.
+
+### Migrations
+In the boot() method of your plugin call `$this->enableMigrations()`.
+Optional you can pass a relative path to the migrations directory, default to `migrations`.
+Keep in mind that migrations must follow the `yyyy_mm_dd_tttt_<name>.php` naming convention, for example `2014_10_12_000000_create_users_table.php` would be a valid migration.
 
 ### How to extend another plugin
 
