@@ -110,7 +110,7 @@ abstract class Plugin
      * @param  array|string  $paths
      * @return void
      */
-    protected function enableMigrations($path = 'migrations')
+    protected function enableMigrations($paths = 'migrations')
     {
         $this->app->afterResolving('migrator', function ($migrator) use ($paths) {
             foreach ((array) $paths as $path) {
