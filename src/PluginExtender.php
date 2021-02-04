@@ -336,9 +336,11 @@ class PluginExtender
     {
         $tokens = token_get_all($file);
 
-        foreach ($tokens as $token) {
+        foreach ($tokens as $idx => $token) {
             if (is_array($token)) {
-                if (token_name($token[0]) == 'T_CLASS') {
+                if (token_name($token[0]) == 'T_CLASS' &&
+                    token_name($tokens[$idx-1][0]) != 'T_DOUBLE_COLON') {
+
                     return true;
                 }
             }
@@ -353,7 +355,7 @@ class PluginExtender
      */
     protected function getClassNamespaceFromFilename($file)
     {
-        $namespace = str_replace($this->pluginManager->getPluginDirectory(), 'Api\\Plugins', $file);
+        $namespace = str_replace($this->pluginManager->getPluginDirectory(), 'App\\Plugins', $file);
         $namespace = str_replace('/', '\\', $namespace);
         $namespace = str_replace('.php', '', $namespace);
 
