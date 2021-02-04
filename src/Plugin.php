@@ -2,6 +2,7 @@
 namespace Oneso\LaravelPlugins;
 
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Str;
 
 abstract class Plugin
 {
@@ -69,7 +70,7 @@ abstract class Plugin
      */
     protected function getViewNamespace()
     {
-        return 'plugin:' . camel_case(
+        return 'plugin:' . Str::camel(
             mb_substr(
                 get_called_class(),
                 strrpos(get_called_class(), '\\') + 1,
