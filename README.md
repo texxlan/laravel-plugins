@@ -47,6 +47,7 @@ Optional you can pass a relative path to the migrations directory, default to `m
 Keep in mind that migrations must follow the `yyyy_mm_dd_tttt_<name>.php` naming convention, for example `2014_10_12_000000_create_users_table.php` would be a valid migration.
 
 ### How to extend another plugin
+see examples/extend
 
 ## ToDo
 - Move plugin directory and project namespace to publishable config file
