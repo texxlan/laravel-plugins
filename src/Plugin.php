@@ -128,6 +128,22 @@ abstract class Plugin
     }
 
     /**
+     * Add a translations namespace for this plugin.
+     * Eg: __("plugin:articles::{trans_path}")
+     *
+     * @param string $path
+     */
+    protected function enableTranslations($path = 'lang')
+    {
+        $this->app->afterResolving('translator', function ($translator) use ($path) {
+            $translator->addNamespace(
+                $this->getViewNamespace(),
+                $this->getPluginPath() . DIRECTORY_SEPARATOR . $path
+            );
+        });
+    }
+
+    /**
      * @return string
      */
     public function getPluginPath()
