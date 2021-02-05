@@ -97,12 +97,19 @@ abstract class Plugin
      * Enable routes for this plugin.
      *
      * @param string $path
+     * @param array|string $middleware
      */
-    protected function enableRoutes($path = 'routes.php')
+    protected function enableRoutes($path = 'routes.php', $middleware = 'web')
     {
-        $this->app->router->group(['namespace' => $this->getPluginControllerNamespace()], function ($app) use ($path) {
-            require $this->getPluginPath() . DIRECTORY_SEPARATOR . $path;
-        });
+        $this->app->router->group(
+            [
+                'namespace' => $this->getPluginControllerNamespace(),
+                'middleware' => $middleware,
+            ],
+            function ($app) use ($path) {
+                require $this->getPluginPath() . DIRECTORY_SEPARATOR . $path;
+            }
+        );
     }
 
     /**
